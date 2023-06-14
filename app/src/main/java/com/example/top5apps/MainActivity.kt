@@ -3,6 +3,7 @@ package com.example.top5apps
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import java.util.Objects
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,11 +18,30 @@ class MainActivity : AppCompatActivity() {
         usageStatistics.sortByDescending { it.timeForeground }
         val button: Button = findViewById(R.id.button)
         button.setOnClickListener {
-            println("Hello World")
-        }
+            for (i in 0 until 5) {
+                if (!Objects.isNull(usageStatistics[i])) {
+                    val mostUsedApp = usageStatistics[i];
+                    val packageName = mostUsedApp.packageName
+                    val applicationLabel = mostUsedApp.applicationlabel
+                    val timeForeground = mostUsedApp.timeForeground
+                    val launchCount = mostUsedApp.launchCount
+                }
+            }
 
-//        val test = usageStatistics.get(0);
+//            for (i in 0..5) {
+//                val mostUsedApp = usageStatistics.firstOrNull()
+//                val packageName = mostUsedApp?.packageName
+//                val applicationLabel = mostUsedApp?.applicationlabel
+//                val timeForeground = mostUsedApp?.timeForeground
+//                val launchCount = mostUsedApp?.launchCount
 //
-//        println(usageStatistics);
+//                if (Objects.isNull(mostUsedApp)) {
+//                    print("It's null");
+//                } else {
+//                    print(packageName);
+//                }
+//            }
+
+        }
     }
 }
