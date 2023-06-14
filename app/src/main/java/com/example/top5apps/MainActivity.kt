@@ -19,36 +19,22 @@ class MainActivity : AppCompatActivity() {
         usageStatistics.sortByDescending { it.timeForeground }
         val top5AppsTextView = findViewById<TextView>(R.id.top5Apps)
         val button: Button = findViewById(R.id.button)
-        val top5AppsPlaceholder = getString(R.string.top5_apps_placeholder)
         button.setOnClickListener {
             for (i in 0 until 5) {
                 if (!Objects.isNull(usageStatistics[i])) {
                     val mostUsedApp = usageStatistics[i];
-                    val packageName = mostUsedApp.packageName
                     val applicationLabel = mostUsedApp.applicationlabel
                     val timeForeground = mostUsedApp.timeForeground
                     val launchCount = mostUsedApp.launchCount
                     val existingText = top5AppsTextView.text.toString()
                     val curApp = i + 1;
-                    val formattedText = existingText + applicationLabel + "\n"
+                    val timeInMinutes = timeForeground / 1000 / 60
+                    val hours = timeInMinutes / 60
+                    val minutes = timeInMinutes % 60
+                    val formattedText = "$existingText$curApp) $applicationLabel: used for $hours hours and $minutes minutes. It was opened $launchCount times.\n \n"
                     top5AppsTextView.text = formattedText
-
                 }
             }
-
-//            for (i in 0..5) {
-//                val mostUsedApp = usageStatistics.firstOrNull()
-//                val packageName = mostUsedApp?.packageName
-//                val applicationLabel = mostUsedApp?.applicationlabel
-//                val timeForeground = mostUsedApp?.timeForeground
-//                val launchCount = mostUsedApp?.launchCount
-//
-//                if (Objects.isNull(mostUsedApp)) {
-//                    print("It's null");
-//                } else {
-//                    print(packageName);
-//                }
-//            }
 
         }
     }
